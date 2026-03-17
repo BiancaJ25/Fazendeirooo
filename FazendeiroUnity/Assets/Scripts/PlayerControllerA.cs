@@ -11,15 +11,32 @@ public class PlayerControllerA : MonoBehaviour
 
     private InputAction moveAction;
     private InputAction fireAction;
+    private InputAction pauseAction;
+    private bool Pause = false;
+    public GameObject Pausado;
+
+    void Start()
+    {
+        Pause = false;
+        Pausado.SetActive(false);
+    }
 
     private void OnEnable()
     {
         inputActions.FindActionMap("Player").Enable();
+        inputActions.FindActionMap("UI").Disable();
+        Pause = false;
+        pauseAction = InputSystem.actions.FindAction("Pause");
+        Pausado.SetActive(false);
     }
 
     private void OnDisable()
     {
         inputActions.FindActionMap("Player").Disable();
+        inputActions.FindActionMap("UI").Enable();
+        Pause = true;
+        pauseAction = InputSystem.actions.FindAction("Pause");
+        Pausado.SetActive(true);
     }
 
     private void Awake()
@@ -45,6 +62,16 @@ public class PlayerControllerA : MonoBehaviour
         if (fireAction.WasPressedThisFrame())
         {
             Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+        }
+        if(pauseAction.WasPressedThisFrame())
+        {
+            if(Pause == false)
+            {
+                OnDisable();
+            } else
+            {
+                OnEnable();
+            }
         }
     }
 }
