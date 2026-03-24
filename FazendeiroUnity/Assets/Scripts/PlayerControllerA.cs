@@ -11,39 +11,47 @@ public class PlayerControllerA : MonoBehaviour
 
     private InputAction moveAction;
     private InputAction fireAction;
-    private InputAction pauseAction;
-    private bool Pause = false;
+    private InputAction pauseActionUI;
+    private InputAction pauseActionPlayer;
     public GameObject Pausado;
 
     void Start()
     {
-        Pause = false;
-        Pausado.SetActive(false);
+        
     }
 
     private void OnEnable()
     {
         inputActions.FindActionMap("Player").Enable();
-        inputActions.FindActionMap("UI").Disable();
-        Pause = false;
-        pauseAction = InputSystem.actions.FindAction("Pause");
-        Pausado.SetActive(false);
     }
 
     private void OnDisable()
     {
         inputActions.FindActionMap("Player").Disable();
-        inputActions.FindActionMap("UI").Enable();
-        Pause = true;
-        pauseAction = InputSystem.actions.FindAction("Pause");
-        Pausado.SetActive(true);
     }
 
     private void Awake()
     {
         moveAction = InputSystem.actions.FindAction("Move");
         fireAction = InputSystem.actions.FindAction("Jump");
+        pauseActionPlayer = InputSystem.actions.FindAction("Player/Pause");
+        pauseActionUI = InputSystem.actions.FindAction("UI/Pause");
     }
+
+    private void PauseGame()
+    {
+        if(pauseActionPlayer.WasPressedThisFrame())
+        {
+           inputActions.FindActionMap("Player").Disable();
+           inputActions.FindActionMap("UI").Enable();
+           Pausado.SetActive(true);
+        } else if(pauseActionUI.WasPressedThisFrame())
+        {
+           inputActions.FindActionMap("Player").Enable();
+           inputActions.FindActionMap("UI").Disable();
+           Pausado.SetActive(false);
+        }
+    } 
 
     void Update()
     {
@@ -62,16 +70,6 @@ public class PlayerControllerA : MonoBehaviour
         if (fireAction.WasPressedThisFrame())
         {
             Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
-        }
-        if(pauseAction.WasPressedThisFrame())
-        {
-            if(Pause == false)
-            {
-                OnDisable();
-            } else
-            {
-                OnEnable();
-            }
         }
     }
 }
