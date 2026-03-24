@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor.MPE;
 
 public class PlayerControllerA : MonoBehaviour
 {
@@ -77,7 +80,14 @@ public class PlayerControllerA : MonoBehaviour
         if (ghostAction.WasPressedThisFrame())
         {
             ghost.SetActive(false);
+            StartCoroutine(Ghost(2));
         }
         PauseGame();
+    }
+
+    private IEnumerator Ghost(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        ghost.SetActive(true);
     }
 }
