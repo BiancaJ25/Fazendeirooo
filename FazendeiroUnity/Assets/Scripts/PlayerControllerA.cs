@@ -11,13 +11,15 @@ public class PlayerControllerA : MonoBehaviour
 
     private InputAction moveAction;
     private InputAction fireAction;
+    private InputAction ghostAction;
     private InputAction pauseActionUI;
     private InputAction pauseActionPlayer;
     public GameObject Pausado;
+    public GameObject ghost;
 
     void Start()
     {
-        
+        ghost = GameObject.Find("/Player/SF_Character_FarmersWife");
     }
 
     private void OnEnable()
@@ -34,6 +36,7 @@ public class PlayerControllerA : MonoBehaviour
     {
         moveAction = InputSystem.actions.FindAction("Move");
         fireAction = InputSystem.actions.FindAction("Jump");
+        ghostAction = InputSystem.actions.FindAction("Ghost");
         pauseActionPlayer = InputSystem.actions.FindAction("Player/Pause");
         pauseActionUI = InputSystem.actions.FindAction("UI/Pause");
     }
@@ -71,5 +74,10 @@ public class PlayerControllerA : MonoBehaviour
         {
             Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
         }
+        if (ghostAction.WasPressedThisFrame())
+        {
+            ghost.SetActive(false);
+        }
+        PauseGame();
     }
 }
