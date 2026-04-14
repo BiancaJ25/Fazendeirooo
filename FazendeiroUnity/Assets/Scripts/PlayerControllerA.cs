@@ -107,7 +107,7 @@ public class PlayerControllerA : MonoBehaviour
         BGhost = false;
     }
 
-    private void OTriggerEnter(Collider col)
+    private void OnTriggerEnter(Collider col)
      {
          if(col.gameObject.CompareTag("AnimalD"))
          {
