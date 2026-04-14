@@ -14,6 +14,12 @@ public class MainMenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("Menu");
     }
+
+    public void GameOver()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
+
     public void SairJogo()
     {
         Application.Quit();

@@ -16,8 +16,11 @@ public class DetectCollisions : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("AnimalD"))
+        {
         placar.AddPontos(1);
         Destroy(gameObject);
         Destroy(other.gameObject);
+        }
     }
 }

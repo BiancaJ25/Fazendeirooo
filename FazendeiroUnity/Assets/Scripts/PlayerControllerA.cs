@@ -141,7 +141,7 @@ public class PlayerControllerA : MonoBehaviour
             vidaOn1.enabled = true;
             vidaOff1.enabled = false;
 
-
+            GameObject.Find("MenuManager").GetComponent<MainMenuManager>().GameOver();
         }
     }
 }
