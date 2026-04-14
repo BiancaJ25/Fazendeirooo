@@ -505,6 +505,17 @@
                 },
                 {
                     "name": "",
+                    "id": "364036b2-89b7-41cb-95ae-6c182e7cd27d",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "1c1c96c1-8be6-496f-b13b-b26ebdf45175",
                     "path": "<Keyboard>/ctrl",
                     "interactions": "",

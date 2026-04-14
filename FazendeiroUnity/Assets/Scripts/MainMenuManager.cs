@@ -5,12 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    [SerializeField] private string nomeLVLjogo;
-    [SerializeField] private GameObject painelMainMenu;
+    //[SerializeField] private GameObject painelMainMenu;
 
     public void Jogar()
     {
-        SceneManager.LoadScene(nomeLVLjogo);
+        SceneManager.LoadScene("Level1");
+    }
+    public void Backmenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
     public void SairJogo()
     {
