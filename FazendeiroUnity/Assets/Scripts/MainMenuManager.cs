@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    //[SerializeField] private GameObject painelMainMenu;
 
     public void Jogar()
     {
