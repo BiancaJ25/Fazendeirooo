@@ -2,7 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
-//using UnityEditor.MPE;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerControllerA : MonoBehaviour
 {
@@ -19,9 +20,22 @@ public class PlayerControllerA : MonoBehaviour
     private InputAction pauseActionPlayer;
     public GameObject Pausado;
     public GameObject ghost;
+    public bool BGhost;
+    private int vida;
+    private int vidaM = 3;
+    [SerializeField] Image vidaOn1;
+    [SerializeField] Image vidaOff1;
+
+    [SerializeField] Image vidaOn2;
+    [SerializeField] Image vidaOff2;
+
+    [SerializeField] Image vidaOn3;
+    [SerializeField] Image vidaOff3;
 
     void Start()
     {
+        vida = vidaM;
+
         ghost = GameObject.Find("/Player/SF_Character_FarmersWife");
     }
 
@@ -80,6 +94,7 @@ public class PlayerControllerA : MonoBehaviour
         if (ghostAction.WasPressedThisFrame())
         {
             ghost.SetActive(false);
+            BGhost = true;
             StartCoroutine(Ghost(2));
         }
         PauseGame();
@@ -89,5 +104,44 @@ public class PlayerControllerA : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         ghost.SetActive(true);
+        BGhost = false;
+    }
+
+    private void OTriggerEnter(Collider col)
+    {
+        if(col.gameObject.CompareTag("AnimalD"))
+        {
+            if(BGhost == true)
+            {
+                return;
+            }
+            else
+            {
+                Dano();
+            }
+        }
+    }
+
+    private void Dano()
+    {
+        vida -= 1;
+
+        if (vida == 2)
+        {
+            vidaOn3.enabled = true;
+            vidaOff3.enabled = false;
+        }
+        if (vida == 1)
+        {
+            vidaOn2.enabled = true;
+            vidaOff2.enabled = false;
+        }
+        if (vida <= 0)
+        {
+            vidaOn1.enabled = true;
+            vidaOff1.enabled = false;
+
+
+        }
     }
 }

@@ -1,23 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class DetectCollisions : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public int pontos = 0;
+    Placar placar;
+    
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        placar = GameObject.Find("Placar").GetComponent<Placar>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        placar.AddPontos(1);
         Destroy(gameObject);
         Destroy(other.gameObject);
     }
