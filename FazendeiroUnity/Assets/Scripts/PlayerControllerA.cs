@@ -21,8 +21,6 @@ public class PlayerControllerA : MonoBehaviour
     public GameObject Pausado;
     public GameObject ghost;
     public bool BGhost;
-    /*int vida = 3;
-    public TextMeshProUGUI pvd;*/
     private int vida;
     private int vidaM = 3;
     [SerializeField] Image vidaOn1;
@@ -120,28 +118,9 @@ public class PlayerControllerA : MonoBehaviour
              else
              {
                  Dano();
-                 /*vida -= 1;
-                 VidaPontos();
-                 print(vida);*/
              }
          }
      }
-
-    /*private void OnTriggerEnter(Collider other)
-    {
-        if (ghost == false)
-        {
-            Destroy(other.gameObject);
-            vida -= 1;
-            VidaPontos();
-            print(vida);
-        }
-    }
-
-    void VidaPontos()
-    {
-        pvd.text = "" + vida;
-    }*/
 
     private void Dano()
     {
