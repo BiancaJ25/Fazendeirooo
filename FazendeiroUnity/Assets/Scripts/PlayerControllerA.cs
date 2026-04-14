@@ -21,7 +21,9 @@ public class PlayerControllerA : MonoBehaviour
     public GameObject Pausado;
     public GameObject ghost;
     public bool BGhost;
-    private int vida;
+    int vida = 3;
+    public TextMeshProUGUI pvd;
+    /*private int vida;
     private int vidaM = 3;
     [SerializeField] Image vidaOn1;
     [SerializeField] Image vidaOff1;
@@ -30,11 +32,11 @@ public class PlayerControllerA : MonoBehaviour
     [SerializeField] Image vidaOff2;
 
     [SerializeField] Image vidaOn3;
-    [SerializeField] Image vidaOff3;
+    [SerializeField] Image vidaOff3;*/
 
     void Start()
     {
-        vida = vidaM;
+        //vida = vidaM;
 
         ghost = GameObject.Find("/Player/SF_Character_FarmersWife");
     }
@@ -104,25 +106,44 @@ public class PlayerControllerA : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         ghost.SetActive(true);
-        BGhost = false;
+        //BGhost = false;
     }
 
-    private void OTriggerEnter(Collider col)
+    /* private void OTriggerEnter(Collider col)
+     {
+         if(col.gameObject.CompareTag("AnimalD"))
+         {
+             if(BGhost == true)
+             {
+                 return;
+             }
+             else
+             {
+                 //Dano();
+                 vida -= 1;
+                 VidaPontos();
+                 print(vida);
+             }
+         }
+     }*/
+
+    private void OnTriggerEnter(Collider other)
     {
-        if(col.gameObject.CompareTag("AnimalD"))
+        if (ghost == false)
         {
-            if(BGhost == true)
-            {
-                return;
-            }
-            else
-            {
-                Dano();
-            }
+            Destroy(other.gameObject);
+            vida -= 1;
+            VidaPontos();
+            print(vida);
         }
     }
 
-    private void Dano()
+    void VidaPontos()
+    {
+        pvd.text = "" + vida;
+    }
+
+    /*private void Dano()
     {
         vida -= 1;
 
@@ -143,5 +164,5 @@ public class PlayerControllerA : MonoBehaviour
 
             GameObject.Find("MenuManager").GetComponent<MainMenuManager>().GameOver();
         }
-    }
+    }*/
 }
